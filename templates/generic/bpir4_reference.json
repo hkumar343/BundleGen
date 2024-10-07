@@ -1,0 +1,220 @@
+{
+    "platformName": "bpir4_reference",
+    "os": "linux",
+    "arch": {
+        "arch": "aarch64",
+        "variant": "v8"
+    },
+    "rdk": {
+        "version": "2024Q3",
+        "supportedFeatures": [
+            "Controller",
+            "DeviceInfo",
+            "Monitor",
+            "OCDM",
+            "TraceControl",
+            "WifiManager",
+            "com.comcast.CoPilot",
+            "com.comcast.DeviceProvisioning",
+            "com.comcast.FrameRate",
+            "com.comcast.HdcpProfile",
+            "com.comcast.HdmiInput",
+            "com.comcast.StateObserver",
+            "com.comcast.StorageManager",
+            "org.rdk.ActivityMonitor",
+            "org.rdk.DeviceDiagnostics",
+            "org.rdk.DisplaySettings",
+            "org.rdk.FrontPanel",
+            "org.rdk.HomeNetworking",
+            "org.rdk.LoggingPreferences",
+            "org.rdk.Network",
+            "org.rdk.OCIContainer",
+            "org.rdk.Proxies",
+            "org.rdk.SleepTimer",
+            "org.rdk.TTSResource",
+            "org.rdk.TTSSettings",
+            "org.rdk.Timer",
+            "org.rdk.UserPreferences",
+            "org.rdk.Warehouse"
+        ]
+    },
+    "hardware": {
+            "graphics":true
+    },
+    "storage": {
+        "persistent": {
+            "storageDir": "/opt/dac_apps/data/0",
+            "maxSize": "100M"
+        }
+    },
+    "gpu": {
+        "extraMounts": [
+            {
+                "source": "/etc/ssl/certs",
+                "destination": "/etc/ssl/certs",
+                "type": "bind",
+                "options": [
+                    "rbind",
+                    "nosuid",
+                    "nodev",
+                    "ro",
+                    "X-mount.mkdir"
+                ]
+            },
+            {
+                "source": "/usr/share/ca-certificates",
+                "destination": "/usr/share/ca-certificates",
+                "type": "bind",
+                "options": [
+                    "rbind",
+                    "nosuid",
+                    "nodev",
+                    "ro",
+                    "X-mount.mkdir"
+                ]
+            },
+            {
+                "source": "/tmp/{id}",
+                "destination": "/tmp/rialto-0",
+                "type": "bind",
+                "options": [
+                    "rbind",
+                    "rw",
+                    "X-dobby.optional"
+                ]
+            }
+        ],
+        "envvar": [
+            "XDG_RUNTIME_DIR=/tmp",
+            "RIALTO_SOCKET_PATH=/tmp/rialto-0"
+        ],
+        "devs": [
+            {
+                "type": "c",
+                "path": "/dev/vchiq",
+                "major": 243,
+                "minor": 0,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/snd/controlC0",
+                "major": 116,
+                "minor": 0,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/snd/seq",
+                "major": 116,
+                "minor": 1,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/snd/pcmC0D0p",
+                "major": 116,
+                "minor": 16,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/snd/pcmC0D1p",
+                "major": 116,
+                "minor": 17,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/snd/timer",
+                "major": 116,
+                "minor": 33,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/dri/card0",
+                "major": 226,
+                "minor": 0,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/dri/card1",
+                "major": 226,
+                "minor": 1,
+                "access": "rw"
+            },
+            {
+                "type": "c",
+                "path": "/dev/dri/renderD128",
+                "major": 226,
+                "minor": 128,
+                "access": "rw"
+            }
+        ],
+        "gfxLibs": [
+        ]
+    },
+    "mounts": [
+        {
+            "source": "/usr/lib/libstdc++.so.6",
+            "destination": "/usr/lib/libstdc++.so.6",
+            "options": [
+                "rbind",
+                "nosuid",
+                "nodev",
+                "ro"
+            ],
+            "type": "bind"
+        },
+        {
+            "source": "/lib/libgcc_s.so.1",
+            "destination": "/lib/libgcc_s.so.1",
+            "options": [
+                "rbind",
+                "nosuid",
+                "nodev",
+                "ro"
+            ],
+            "type": "bind"
+        },
+       {
+            "source": "tmpfs",
+            "destination": "/tmp",
+            "options": [
+                "nosuid",
+                "strictatime",
+                "mode=755",
+                "size=65536k"
+            ],
+            "type": "tmpfs"
+        }
+    ],
+    "network": {
+        "options": [
+            "nat",
+            "open",
+            "private"
+        ]
+    },
+    "envvar": [
+    ],
+    "resourceLimits": [
+        {
+            "type": "RLIMIT_NPROC",
+            "hard": 300,
+            "soft": 300
+        },
+        {
+            "type": "RLIMIT_RTPRIO",
+            "hard": 6,
+            "soft": 6
+        }
+    ],
+    "disableUserNamespacing": true,
+    "logging": {
+        "mode": "file",
+        "logDir": "/var/log"
+    }
+}
